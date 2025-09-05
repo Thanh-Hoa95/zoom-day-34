@@ -1,0 +1,133 @@
+html {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.comment {
+    max-width: 850px;
+    background-color: #f3f4f6;
+    border-radius: 16px;
+    padding: 30px 20px;
+}
+
+.comment .current-user {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.comment__form {
+    display: flex;
+    gap: 15px;
+}
+
+.comment__form .comment-action {
+    position: relative;
+    flex-grow: 1;
+}
+
+.comment__form .send-btn {
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    right: 7px;
+    background-color: #2563eb;
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.comment__form .send-btn i {
+    color: #fff;
+    padding-top: 4px;
+    padding-right: 1px;
+
+}
+
+img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.comment__form textarea {
+    width: 100%;
+    height: 80px;
+    resize: none;
+    margin-top: 8px;
+}
+
+.comment-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.comment__list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.comment__list .translate {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.comment-item {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-top: 30px;
+}
+.comment-item .title {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+h3 {
+    padding: 0;
+    margin: 0;
+}
+
+.comment-item .email {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.comment-item .body {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.comment-item .time {
+    font-size: 11px;
+    padding-top: 4px;
+    opacity: 0.8;
+}
+
+.comment-footer {
+    display: flex;
+    gap: 15px;
+    font-size: 13px;
+}
+
+.comment-footer i {
+    margin-right: 5px;
+}

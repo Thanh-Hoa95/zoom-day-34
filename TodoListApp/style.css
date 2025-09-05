@@ -1,0 +1,138 @@
+#root {
+    /* max-width: 300px; */
+    text-align: center;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #e0f7fa;
+    padding: 20px 30px;
+    margin-top: 40px;
+}
+
+.container .heading {
+    margin: 0;
+}
+
+
+.container form {
+    width: 300px;
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.container form button {
+    padding: 0 6px;
+}
+
+.container form button:hover {
+    cursor: pointer;
+}
+
+.container form input {
+    padding: 8px 5px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0;
+    width: 300px;
+}
+
+.todo-item span {
+    font-size: 20px;
+}
+
+.todo-item span.done {
+    text-decoration: line-through;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+ul li {
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    border-radius: 3px;
+    background-color: #b2ebf2;
+}
+
+.todo-item input {
+    cursor: pointer;
+    width: 17px;
+    height: 17px;
+}
+
+.todo-item button {
+    margin-left: auto;
+    background: red;
+    color: white;
+    border: none;
+    padding: 3px 7px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.task-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 50px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.task-summary .box {
+    width: 300px;
+    padding: 13px 0;
+    border-radius: 3px;
+    border: 1px solid #7ddeea;
+}
+
+.task-total {
+    background-color: #b2ebf2;
+}
+
+.task-total:hover {
+    background-color: #80deea;
+}
+
+.task-pending {
+    background-color: #fff9c4;
+}
+
+.task-pending:hover {
+    background-color: #fff59d;
+}
+
+.task-completed {
+    background-color: #c8e6c9;
+}
+
+.task-completed:hover {
+    background-color: #a5d6a7;
+}
+
+.loading {
+    margin-top: 35px;
+    font-size: 16px;
+    font-weight: 600;
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="productList.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+            integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+    </head>
+    <body>
+        <div id="root"></div>
+        <script
+            crossorigin
+            src="https://unpkg.com/react@18/umd/react.development.js"
+        ></script>
+        <script
+            crossorigin
+            src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+        ></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+        <script type="text/babel">
+            // Component
+            function Modal({ product, onClose }) {
+                if (!product) return null
+                return (
+                    <div className="modal-overlay">
+                        <div className="box-modal">
+                            <div className="header">
+                                <span className="id">{product.id}</span>
+                                <i
+                                    className="fa-solid fa-xmark"
+                                    onClick={onClose}
+                                ></i>
+                            </div>
+                            <div className="content">
+                                <div class="title">{product.title}</div>
+                                <p className="text-content">{product.body}</p>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+
+            function ProductList() {
+                const [products, setProducts] = React.useState([])
+                const [loading, setLoading] = React.useState(true)
+                const [expandProduct, setExpandProduct] = React.useState(null)
+
+                const handleCutContent = (content) => {
+                    if (content.length > 100) {
+                        return `${content.slice(0, 100)}...`
+                    } else {
+                        return content
+                    }
+                }
+
+                React.useEffect(() => {
+                    fetch(
+                        "https://jsonplaceholder.typicode.com/posts?_limit=12"
+                    )
+                        .then((res) => res.json())
+                        .then((resProducts) => setProducts(resProducts))
+                        .finally(() => setLoading(false))
+                }, [])
+                return (
+                    <>
+                        {loading ? (
+                            <p>Loading ...</p>
+                        ) : (
+                            products.map((product) => {
+                                return (
+                                    <div
+                                        className="product-card"
+                                        key={product.id}
+                                    >
+                                        <span>{product.id}</span>
+                                        <h3>{product.title}</h3>
+                                        <p className="content">
+                                            {handleCutContent(product.body)}
+                                        </p>
+                                        <button
+                                            onClick={() =>
+                                                setExpandProduct(product)
+                                            }
+                                        >
+                                            Xem chi tiết
+                                        </button>
+                                    </div>
+                                )
+                            })
+                        )}
+
+                        <Modal
+                            product={expandProduct}
+                            onClose={() => setExpandProduct(null)}
+                        ></Modal>
+                    </>
+                )
+            }
+
+            const app = (
+                <>
+                    <h1>Product List</h1>
+                    <ProductList></ProductList>
+                </>
+            )
+
+            const root = ReactDOM.createRoot(document.querySelector("#root"))
+            root.render(app)
+        </script>
+    </body>
+</html>

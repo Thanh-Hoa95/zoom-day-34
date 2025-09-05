@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script
+            crossorigin
+            src="https://unpkg.com/react@18/umd/react.development.js"
+        ></script>
+        <script
+            crossorigin
+            src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+        ></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+        <script type="text/babel">
+            const data = [
+                { text: "Counter App", url: "./CounterApp/counterApp.html" },
+                {
+                    text: "Todo List App",
+                    url: "./TodoListApp/todoListApp.html",
+                },
+                {
+                    text: "Profile Card",
+                    url: "./ProfileCard/profileCard.html",
+                },
+                {
+                    text: "Product List",
+                    url: "./ProductList/productList.html",
+                },
+                {
+                    text: "Comment System",
+                    url: "./CommentSystem/commentSystem.html",
+                },
+                { text: "Weather App", url: "./WeatherApp/weatherApp.html" },
+            ]
+
+            // Component
+            function Home({ data, children }) {
+                return (
+                    <ul>
+                        <h1>{children}</h1>
+                        {data.map((item) => {
+                            return (
+                                <li>
+                                    <a href={item.url}>{item.text}</a>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                )
+            }
+
+            const app = (
+                <>
+                    <Home data={data}>
+                        Day 34: React.createElement, JSX, Props, State
+                    </Home>
+                </>
+            )
+
+            const root = ReactDOM.createRoot(document.querySelector("#root"))
+            root.render(app)
+        </script>
+    </body>
+</html>
+
+
+<!-- 
+
+
+ -->

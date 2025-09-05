@@ -1,0 +1,98 @@
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.product-card {
+    width: 600px;
+    height: auto;
+    padding: 16px;
+    border-radius: 12px;
+    background: #cfd1da; /* màu mặc định */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.product-card .content {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Nền mờ phía sau modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* nền đen mờ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999; /* nổi trên cùng */
+}
+
+/* Box modal */
+.box-modal {
+    background: #fff;
+    width: 500px;
+    max-width: 90%;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s ease;
+    overflow: hidden;
+}
+
+/* Header modal */
+.box-modal .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Nút đóng */
+.box-modal .header i {
+    cursor: pointer;
+    font-size: 20px;
+    color: #333;
+    transition: color 0.2s ease;
+}
+.box-modal .header i:hover {
+    color: red;
+}
+
+/* Nội dung */
+.box-modal .content {
+    padding: 16px;
+}
+.box-modal .content .title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.box-modal .content .text-content {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #444;
+}
+
+/* Hiệu ứng fade */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

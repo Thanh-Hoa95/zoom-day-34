@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+            integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="stylesheet" href="weatherApp.css" />
+    </head>
+    <body>
+        <div id="root"></div>
+        <script
+            crossorigin
+            src="https://unpkg.com/react@18/umd/react.development.js"
+        ></script>
+        <script
+            crossorigin
+            src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+        ></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script type="text/babel">
+            // Component
+            function WeatherApp() {
+                const weatherData = {
+                    hanoi: {
+                        city: "Hà Nội",
+                        temp: 31,
+                        weather: "Nắng",
+                        humidity: 65,
+                    },
+                    hcm: {
+                        city: "TP.HCM",
+                        temp: 28,
+                        weather: "Có mây",
+                        humidity: 78,
+                    },
+                    danang: {
+                        city: "Đà Nẵng",
+                        temp: 23,
+                        weather: "Mưa nhẹ",
+                        humidity: 82,
+                    },
+                }
+
+                const [values, setValues] = React.useState(weatherData.hanoi)
+                const [valueRefresh, setValueRefresh] = React.useState([])
+                const [isRefresh, setIsRefresh] = React.useState(false)
+
+                const handleChangeOption = (e) => {
+                    Object.entries(weatherData).filter(([key, data]) => {
+                        if (key === e.target.value) {
+                            setValues(data)
+                        }
+                    })
+                    setValueRefresh(null) // reset giá trị random
+                    setIsRefresh(false) // tắt trạng thái random
+                }
+
+                const handleChangeIcon = (weather) => {
+                    if (weather === "Nắng") {
+                        return "☀️"
+                    } else if (weather === "Có mây") {
+                        return "🌤️"
+                    } else if (weather === "Mưa nhẹ") {
+                        return "🌧️"
+                    }
+                }
+
+                const handleRandom = () => {
+                    setIsRefresh(true)
+                    const randomNumber = Math.floor(Math.random() * 6)
+                    const randomOperator = Math.random()
+                    const newTemp =
+                        randomOperator > 0.5
+                            ? values.temp + randomNumber
+                            : values.temp - randomNumber
+
+                    const newHumidity =
+                        randomOperator > 0.5
+                            ? values.humidity + randomNumber
+                            : values.humidity - randomNumber
+
+                    const newWeather =
+                        newTemp > 30
+                            ? "Nắng"
+                            : newTemp >= 25
+                            ? "Có mây"
+                            : "Mưa nhẹ"
+
+                    setValueRefresh({
+                        ...values,
+                        temp: newTemp,
+                        humidity: newHumidity,
+                        weather: newWeather,
+                    })
+                }
+                return (
+                    <>
+                        <select
+                            name="city"
+                            id="slection-city"
+                            onChange={handleChangeOption}
+                        >
+                            <option value="">Chọn thành phố của bạn</option>
+                            {Object.keys(weatherData).map((key) => (
+                                <option value={key} key={key}>
+                                    {key}
+                                </option>
+                            ))}
+                        </select>
+                        <div className="weather-card">
+                            <div className="detail">
+                                <div className="location">
+                                    <i className="fa-solid fa-location-dot"></i>
+                                    <h2 className="city">{values.city}</h2>
+                                </div>
+                                <span className="temp">
+                                    {isRefresh
+                                        ? valueRefresh.temp
+                                        : values.temp}
+                                    <sup>°</sup>
+                                </span>
+                                <span className="status">
+                                    {isRefresh
+                                        ? valueRefresh.weather
+                                        : values.weather}
+                                </span>
+                                <span className="humidity">
+                                    Độ ẩm:{" "}
+                                    {isRefresh
+                                        ? valueRefresh.humidity
+                                        : values.humidity}
+                                    %
+                                </span>
+                            </div>
+                            <div className="right-card">
+                                <span className="icon">
+                                    {handleChangeIcon(
+                                        isRefresh
+                                            ? valueRefresh.weather
+                                            : values.weather
+                                    )}
+                                </span>
+                                <button onClick={() => handleRandom()}>
+                                    <i className="fa-solid fa-arrows-rotate"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </>
+                )
+            }
+
+            const app = (
+                <>
+                    <h1>Weather App</h1>
+                    <WeatherApp></WeatherApp>
+                </>
+            )
+
+            const root = ReactDOM.createRoot(document.querySelector("#root"))
+            root.render(app)
+        </script>
+    </body>
+</html>

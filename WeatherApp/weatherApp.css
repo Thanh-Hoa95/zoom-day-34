@@ -1,0 +1,83 @@
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weather-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    width: 300px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.weather-card .detail {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 25px;
+    align-items: center;
+}
+
+.weather-card .city {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.weather-card .location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.weather-card .temp {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.weather-card .status {
+    font-size: 16px;
+    text-transform: uppercase;
+    opacity: 0.9;
+}
+
+.weather-card .humidity {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.weather-card .icon {
+    font-size: 60px;
+    padding: 0 20px;
+}
+
+.right-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-card button {
+    border: none;
+    background-color: inherit;
+    rotate: 0deg;
+    transition: all ease 2s;
+    cursor: pointer;
+}
+
+.right-card button:hover i {
+    rotate: 45deg;
+}
+
+.right-card button i {
+    font-size: 18px;
+    color: #fff;
+}

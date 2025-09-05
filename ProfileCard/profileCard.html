@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <div id="root"></div>
+        <script
+            crossorigin
+            src="https://unpkg.com/react@18/umd/react.development.js"
+        ></script>
+        <script
+            crossorigin
+            src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+        ></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script type="text/babel">
+            // Component
+            function ProfileCard() {
+                const [user, setUser] = React.useState(null)
+
+                React.useEffect(() => {
+                    fetch("https://jsonplaceholder.typicode.com/users/1")
+                        .then((res) => res.json())
+                        .then((resUser) => {
+                            setUser(resUser)
+                            console.log(resUser)
+                        })
+                }, [])
+
+                return (
+                    <div className="card">
+                        {user ? (
+                            <>
+                                <img src="./bg-girl.png" alt="Placeholder" />
+                                <ul className="info" key={user.id}>
+                                    <li>Name: {user.name}</li>
+                                    <li>Username: {user.username}</li>
+                                    <li>Email: {user.email}</li>
+                                    <li>Phone: {user.phone}</li>
+                                    <li>Website: {user.website}</li>
+                                    <li>
+                                        Address: {user.address.city},
+                                        {user.address.street}
+                                    </li>
+                                </ul>
+                            </>
+                        ) : (
+                            <>
+                                <p>Loading ....</p>
+                            </>
+                        )}
+                    </div>
+                )
+            }
+
+            const app = (
+                <>
+                    <h1>Profile Card</h1>
+                    <ProfileCard></ProfileCard>
+                </>
+            )
+
+            const root = ReactDOM.createRoot(document.querySelector("#root"))
+            root.render(app)
+        </script>
+    </body>
+</html>

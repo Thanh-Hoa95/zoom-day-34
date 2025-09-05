@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+            integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="stylesheet" href="commentSystem.css" />
+    </head>
+
+    <body>
+        <div id="root"></div>
+        <script
+            crossorigin
+            src="https://unpkg.com/react@18/umd/react.development.js"
+        ></script>
+        <script
+            crossorigin
+            src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+        ></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+        <script type="text/babel">
+            // Component
+            function CommentSystem() {
+                const [comments, setComments] = React.useState([])
+                const [loading, setLoading] = React.useState(true)
+                const [valueInput, setValueInput] = React.useState("")
+                let currentLength = comments.length
+                const handleSubmit = (e) => {
+                    const credential = {
+                        postId: 1,
+                        id: ++currentLength,
+                        name: "Duyyy",
+                        email: "duynkfullstack@edu.vn",
+                        body: valueInput,
+                    }
+
+                    setComments([credential, ...comments])
+
+                    setValueInput("")
+                }
+
+                const handleChange = (e) => {
+                    setValueInput(e.target.value)
+                }
+
+                const handleKeyDown = (e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                        e.preventDefault()
+                        handleSubmit()
+                    }
+                }
+
+                React.useEffect(() => {
+                    fetch(
+                        "https://jsonplaceholder.typicode.com/comments?postId=1"
+                    )
+                        .then((res) => res.json())
+                        .then((resComments) => setComments(resComments))
+                        .finally(() => setLoading(false))
+                }, [])
+                return loading ? (
+                    <p>Loading ...</p>
+                ) : (
+                    <div className="comment">
+                        <div className="comment__form">
+                            <img
+                                src={`https://ui-avatars.com/api/?name=${"Duyyy"}&background=random`}
+                                alt=""
+                            />
+                            <div className="comment-action">
+                                <span className="current-user">
+                                    {"Duy (duynk@fullstack)"}
+                                </span>
+                                <textarea
+                                    value={valueInput}
+                                    name="comment-input"
+                                    id="comment-input"
+                                    placeholder="Write your comment here ..."
+                                    onChange={handleChange}
+                                    onKeyDown={handleKeyDown}
+                                />
+                                <button
+                                    className="send-btn"
+                                    onClick={handleSubmit}
+                                >
+                                    <i className="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div className="comment__list">
+                            {comments.map((comment) => (
+                                <div className="comment-item" key={comment.id}>
+                                    <img
+                                        className="avatar"
+                                        src={`https://ui-avatars.com/api/?name=${comment.name}&background=random`}
+                                        alt=""
+                                    />
+                                    <div className="comment-content">
+                                        <div className="title">
+                                            <h3 className="user-name">
+                                                {comment.name}
+                                            </h3>
+                                            <span className="time">
+                                                2 hour ago
+                                            </span>
+                                        </div>
+                                        <span className="email">
+                                            {comment.email}
+                                        </span>
+                                        <p className="body">{comment.body}</p>
+                                        <span className="translate">
+                                            Translate
+                                        </span>
+                                        <div className="comment-footer">
+                                            <div className="like">
+                                                <i className="fa-solid fa-thumbs-up"></i>
+                                                20
+                                            </div>
+                                            <div className="dislike">
+                                                <i className="fa-solid fa-thumbs-down"></i>
+                                                20
+                                            </div>
+                                            <div className="dislike">
+                                                <i className="fa-solid fa-comment-dots"></i>
+                                                Reply
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )
+            }
+
+            const app = (
+                <>
+                    <h1>Comment System</h1>
+                    <CommentSystem></CommentSystem>
+                </>
+            )
+
+            const root = ReactDOM.createRoot(document.querySelector("#root"))
+            root.render(app)
+        </script>
+    </body>
+</html>

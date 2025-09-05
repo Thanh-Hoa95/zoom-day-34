@@ -1,0 +1,80 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#root {
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(135deg, #bdbdbd, #e0e0e0);
+    border-radius: 16px;
+}
+
+.container.zero {
+    background: linear-gradient(135deg, #bdbdbd, #e0e0e0);
+}
+
+.container.positive {
+    background: linear-gradient(135deg, #a5d6a7, #c8e6c9);
+}
+
+.container.negative {
+    background: linear-gradient(135deg, #ef9a9a, #ffcdd2);
+}
+
+.container .count-section {
+    min-height: 250px;
+}
+
+.container .count-section h2 {
+    line-height: 250px;
+    font-size: 55px;
+    font-weight: 700;
+    color: #000;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+button {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: none;
+    background-color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.buttons .decrease:hover {
+    background-color: #c62828;
+    color: #fff;
+}
+
+.buttons .increase:hover {
+    background-color: #2e7d32;
+    color: #fff;
+}
+
+.buttons .reset:hover {
+    background-color: #616161;
+    color: #fff;
+}
+
+.status {
+    margin: 30px 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
